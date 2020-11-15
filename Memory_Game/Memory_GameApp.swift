@@ -1,9 +1,3 @@
-//
-//  Memory_GameApp.swift
-//  Memory_Game
-//
-//  Created by KHU_Taewoo on 2020/11/12.
-//
 
 import SwiftUI
 
@@ -11,7 +5,15 @@ import SwiftUI
 struct Memory_GameApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            EmojiMemoryGameView(viewModel: EmojiMemoryGame())
         }
     }
+}
+
+struct Memory_GameApp_Previews: PreviewProvider {
+	static var previews: some View {
+		Group {
+			EmojiMemoryGameView(viewModel: EmojiMemoryGame())
+		}
+	}
 }
