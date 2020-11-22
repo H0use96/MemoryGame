@@ -1,6 +1,7 @@
 
 import SwiftUI
 
+/// ViewModel
 class EmojiMemoryGame: ObservableObject {
 	
 	@Published private var model: MemoryGmae<String> = createMemoryGame()

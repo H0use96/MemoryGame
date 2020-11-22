@@ -1,6 +1,7 @@
 
 import Foundation
 
+/// Model
 struct MemoryGmae<CardContent> where CardContent: Equatable{
     
     var cards: [Card]
@@ -61,7 +62,7 @@ struct MemoryGmae<CardContent> where CardContent: Equatable{
     struct Card: Identifiable{
         var id: Int
         var content: CardContent
-        var isFaceUp = false
+        var isFaceUp = true
         var isMatched = false
     }
 }
