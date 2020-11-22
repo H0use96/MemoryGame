@@ -23,8 +23,7 @@ struct EmojiMemoryGameView: View {
 struct CardView: View {
 	let card: MemoryGmae<String>.Card
 	
-	let cornerRadius: CGFloat = 10
-	let edgeLineWidth: CGFloat = 3
+	
 	
 	func fontSize(for size: CGSize) -> CGFloat {
 		min(size.width, size.height) * 0.75
@@ -36,25 +35,15 @@ struct CardView: View {
 		}
 	}
 	
+	@ViewBuilder
 	private func body(for size: CGSize) -> some View {
-		ZStack {
-			if card.isFaceUp {
-				RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
-				RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
-				Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(60-90), clockwise: true)
-					.opacity(0.6)
-					.padding(5)
-				
-				Text(card.content)
-				
-			} else {
-				if !card.isMatched {
-					RoundedRectangle(cornerRadius: cornerRadius)
-						.fill()
-				}
-			}
+		
+		if card.isFaceUp || !card.isMatched {
+			Text(card.content)
+				.font(Font.system(size: fontSize(for: size)))
+				.cardify(isFaceUp: card.isFaceUp)
 		}
-		.font(Font.system(size: fontSize(for: size)))
+		
 	}
 }
 
