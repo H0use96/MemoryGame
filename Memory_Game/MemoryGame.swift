@@ -1,9 +1,22 @@
 
 import Foundation
 
-struct MemoryGmae<CardContent> {
+struct MemoryGmae<CardContent> where CardContent: Equatable{
     
     var cards: [Card]
+	
+	var chosenCardIndex: Int? {
+		
+		/// 이미 오픈되어 있는 카드가, 이전에 선택한 카드니깐
+		get {
+			return cards.indices.filter{idx in cards[idx].isFaceUp}.only
+		}
+		
+		set(chosenIndex) {
+			cards.indices.forEach { idx in cards[idx].isFaceUp = chosenIndex == idx }
+		}
+		
+	}
     
     init(numberOfPairsOfCard: Int, cardContentFactory: (Int) -> CardContent) {
         cards = Array<Card>()
@@ -25,8 +38,23 @@ struct MemoryGmae<CardContent> {
 	}
 	
 	mutating func choose(card: Card) {
-		let chosenIndex = index(of: card)
-		cards[chosenIndex].isFaceUp.toggle()
+		
+		let inputIdxOptional = cards.findFirstOne(of: card)
+		
+		if let inputIdx = inputIdxOptional, !cards[inputIdx].isMatched, !cards[inputIdx].isFaceUp{
+			if let chosenIdx = chosenCardIndex, !card.isMatched, !card.isFaceUp {
+				if cards[chosenIdx].content == cards[inputIdx].content {
+					cards[inputIdx].isMatched = true
+					cards[chosenIdx].isMatched = true
+				}
+				
+				cards[inputIdx].isFaceUp = true
+			} else {
+				chosenCardIndex = inputIdxOptional
+			}
+		}
+		
+		
 	}
     
     
