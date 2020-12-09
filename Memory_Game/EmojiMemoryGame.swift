@@ -11,6 +11,7 @@ class EmojiMemoryGame: ObservableObject {
 	}
 	
 	func choose(card: MemoryGmae<String>.Card) {
+		print("hello")
 		return model.choose(card: card)
 	}
 	

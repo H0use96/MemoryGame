@@ -23,8 +23,6 @@ struct EmojiMemoryGameView: View {
 struct CardView: View {
 	let card: MemoryGmae<String>.Card
 	
-	
-	
 	func fontSize(for size: CGSize) -> CGFloat {
 		min(size.width, size.height) * 0.75
 	}
@@ -43,6 +41,8 @@ struct CardView: View {
 				.font(Font.system(size: fontSize(for: size)))
 				.cardify(isFaceUp: card.isFaceUp)
 		}
+		
+		
 		
 	}
 }
